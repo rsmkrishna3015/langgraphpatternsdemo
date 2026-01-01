@@ -1,0 +1,13 @@
+langchain_community>=0.3.0
+langchain_openai>=0.2.0
+langchain_groq>=0.2.0
+langchain_neo4j>=0.1.0
+langgraph>=0.2.0
+neo4j>=5.14.0,<6.0.0
+# Relaxed Pydantic to allow compatible versions for LangChain
+pydantic>=2.9.0,<2.11.0
+sentence-transformers>=3.0.0
+beautifulsoup4>=4.12.0
+streamlit>=1.38.0
+tqdm>=4.66.0
+ipykernel>=6.29.0
