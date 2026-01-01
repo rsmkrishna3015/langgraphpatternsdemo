@@ -45,18 +45,3 @@ def load_langgraph_agenticai_app() :
 
 if __name__ == "__main__":
     load_langgraph_agenticai_app()
-
-#
-#
-#if __name__ == "__main__":
-#    graph = graphclient()
-#
-#   # print(graph.create_promptchain_graph(
-#   #     api_key="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",
-#   #     model_name="qwen/qwen3-32b"
-#   # ).invoke({"topic": "bad boy and a dog"}))
-#
-#    print(graph.create_routerpatter_graph(
-#        api_key="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",
-#        model_name="qwen/qwen3-32b"
-#    ).invoke({"input": "get me sample code for java hashmap"}))
