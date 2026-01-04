@@ -1,6 +1,7 @@
-from src.state.chainstage import chainstage, Routerstate
+from src.state.chainstage import chainstage, Routerstate, orchastratorstate
 from src.nodes.promptchainnodes import PromptChainNodes
 from src.nodes.Routernodes import Routernodes
+from src.nodes.orchestratorworkernode import Orchestratorworker
 from langgraph.graph import StateGraph, START, END
 
 class graphclient():
@@ -47,3 +48,19 @@ class graphclient():
 
         return graph.compile()
     
+    def create_orchestertorworker_graph(self, api_key:str, model_name:str) -> StateGraph[orchastratorstate] :
+        graph = StateGraph(orchastratorstate)
+
+        orcworker = Orchestratorworker(api_key, model_name)
+
+        graph.add_node("orchestertor", orcworker.orchestratornode)
+        graph.add_node("worker", orcworker.workernode)
+        graph.add_node("finalreport", orcworker.concludereport)
+
+        graph.add_edge(START, "orchestertor")
+        graph.add_conditional_edges("orchestertor", orcworker.assign_workers, ["worker"])
+        graph.add_edge("worker", "finalreport")
+        graph.add_edge("finalreport", END)
+
+        return graph.compile()
+

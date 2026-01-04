@@ -17,6 +17,8 @@ class PromptChainNodes():
         if match:
             think = match.group(1).strip()
             resultstr = fulltext[match.end():].strip()
+        else:
+            resultstr = fulltext.strip()
         return {"initial_story": resultstr}
 
     def improved_story_node(self, state: chainstage) -> str:
@@ -28,6 +30,8 @@ class PromptChainNodes():
         if match:
             think = match.group(1).strip()
             resultstr = fulltext[match.end():].strip()
+        else:
+            resultstr = fulltext.strip()
         return {"improved_story": resultstr}
 
     def summarization_node(self, state: chainstage) -> str:
@@ -39,4 +43,6 @@ class PromptChainNodes():
         if match:
             think = match.group(1).strip()
             resultstr = fulltext[match.end():].strip()
+        else:
+            resultstr = fulltext.strip()
         return {"summary": resultstr}

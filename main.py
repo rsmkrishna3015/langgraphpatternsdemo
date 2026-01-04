@@ -29,15 +29,27 @@ def load_langgraph_agenticai_app() :
                 events = graph.create_promptchain_graph(user_input.get("GROQ_API_KEY"), user_input.get("select_groq_model"))
                 for event in events.stream({"topic": user_message}):
                     for key, value in event.items():
-                        with st.chat_message("assistant"):
-                            st.markdown(value)
+                        for k, v in value.items():
+                          with st.chat_message("assistant"):
+                            st.markdown(v)
 
             if usecase == "ROUTER":
                 events = graph.create_routerpatter_graph(user_input.get("GROQ_API_KEY"), user_input.get("select_groq_model"))
                 for event in events.stream({"input": user_message}):
                     for key, value in event.items():
-                        with st.chat_message("assistant"):
-                            st.markdown(value)
+                        for k, v in value.items():
+                          with st.chat_message("assistant"):
+                            st.markdown(v)
+
+            if usecase == "ORCHESTRATOR-WORKER":
+                events = graph.create_orchestertorworker_graph(user_input.get("GROQ_API_KEY"), user_input.get("select_groq_model"))
+                for event in events.stream({"topic": user_message}):
+                    if "finalreport" in event:
+                        final_state = event["finalreport"]
+
+                        if "finalreport" in final_state:
+                            with st.chat_message("assistant"):
+                                st.markdown(final_state["finalreport"])
 
 
         except Exception as e:
